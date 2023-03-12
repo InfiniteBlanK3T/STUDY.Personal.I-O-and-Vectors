@@ -25,10 +25,10 @@ const Vector2D& Polygon::getVertex(size_t aIndex) const
 }
 float Polygon::getPerimeter() const noexcept
 {
-	float Result = 0;
+	float Result = 0.0f;
 	for (int i = 0; i < fNumberOfVertices; i++)
 	{
-		Result += (fVertices[i + 1] - fVertices[0]).length();
+		Result += (fVertices[i + 1] - fVertices[i]).length();
 	}
 	return Result;
 }
@@ -41,7 +41,6 @@ Polygon Polygon::scale(float aScalar) const noexcept
 	{
 		Result.fVertices[i] = fVertices[i] * aScalar;		
 	}
-
 	return Result;
 }
 
