@@ -6,17 +6,44 @@ Polygon::Polygon() noexcept:
 	fNumberOfVertices()
 {}
 
-void readData(std::istream& aIStream);
+void Polygon::readData(std::istream& aIStream)
+{
+	while (aIStream >> fVertices[fNumberOfVertices])
+	{
+		fNumberOfVertices++;
+	}
+}
 
 size_t Polygon::getNumberOfVertices() const noexcept
 {
 	return fNumberOfVertices;
 }
 
-const Vector2D& getVertex(size_t aIndex) const;
-float getPerimeter() const noexcept;
+const Vector2D& Polygon::getVertex(size_t aIndex) const
+{	
+	return fVertices[aIndex];
+}
+float Polygon::getPerimeter() const noexcept
+{
+	float Result = 0;
+	for (int i = 0; i < fNumberOfVertices; i++)
+	{
+		Result += (fVertices[i + 1] - fVertices[0]).length();
+	}
+	return Result;
+}
 
-Polygon scale(float aScalar) const noexcept;
+Polygon Polygon::scale(float aScalar) const noexcept
+{
+	Polygon Result = *this;
+
+	for (int i = 0; i < fNumberOfVertices; i++)
+	{
+		Result.fVertices[i] = fVertices[i] * aScalar;		
+	}
+
+	return Result;
+}
 
 
 
